@@ -46,10 +46,178 @@ Deploy the website.
 Upload to GitHub Pages for free hosting.
 
 ## PROGRAM
+### App.js
+```
+import React, { useState } from 'react';
+import './App.css';
 
+function App() {
+  const [input, setInput] = useState('');
+
+  const handleClick = (value) => {
+    if (value === '=') {
+      calculateResult();
+    } else if (value === 'AC') {
+      setInput('');
+    } else if (value === '⌫') {
+      setInput((prevInput) => prevInput.slice(0, -1));
+    } else {
+      setInput((prevInput) => prevInput + value);
+    }
+  };
+
+  const calculateResult = () => {
+    try {
+      setInput(eval(input).toString());
+    } catch (error) {
+      setInput('Error');
+    }
+  };
+
+  return (
+    <div className="calculator">
+      <h1>Calculator</h1>
+      <div className="display">
+        <input type="text" value={input} readOnly />
+        
+      </div>
+      <div className="buttons">
+        {[ 'AC', '⌫', '%', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '0', '.', '=' ].map((button) => (
+          <button
+            key={button}
+            onClick={() => handleClick(button)}
+            className={`button-circle ${
+              button === '=' ? 'equals' :
+              button === 'AC' ? 'all-clear' :
+              button === '⌫' ? 'backspace' :
+              ['/','*','-','+','%'].includes(button) ? 'operator' : 'number'
+            }`}
+          >
+            {button}
+          </button>
+        ))}
+      </div>
+      <footer className="footer">
+        <p>&copy; Developed by: Deepika S</p>
+        <p>Register Number: 212222230028</p>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+```
+### App.css
+```
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #3e1e68, #2d0b42);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.calculator {
+  background: #8064b3;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(180, 90, 255, 0.3);
+  width: 350px;
+  text-align: center;
+}
+.display {
+  background: #8d7cb2;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: inset 0px 0px 10px rgba(180, 90, 255, 0.4);
+}
+
+.display input {
+  width: 100%;
+  height: 50px;
+  font-size: 28px;
+  text-align: right;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: #e2d5e2;
+  outline: none;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+button {
+  width: 65px;
+  height: 65px;
+  font-size: 22px;
+  cursor: pointer;
+  border: none;
+  background: #4a2c6e;
+  color: #ffffff;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 5px 15px rgba(180, 90, 255, 0.3);
+}
+
+button:hover {
+  background: #5b3b80;
+}
+
+button:active {
+  background: #714dab;
+  transform: scale(0.9);
+}
+
+.equals {
+  background: #ff5722;
+  color: #fff;
+}
+
+.equals:hover {
+  background: #e64a19;
+}
+
+.all-clear {
+  background: #ff3333;
+}
+
+.all-clear:hover {
+  background: #cc0000;
+}
+
+.backspace {
+  background: #3399ff;
+}
+
+.backspace:hover {
+  background: #007acc;
+}
+
+
+.operator {
+  background: #009688;
+}
+
+.operator:hover {
+  background: #00796b;
+}
+.footer {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #efeaea;
+}
+```
 
 ## OUTPUT
-
-
+![rc1](https://github.com/user-attachments/assets/ed6b2266-ce99-480e-b3d3-44b7c3410d6e)
+![rc2](https://github.com/user-attachments/assets/c79bc921-5ba7-4551-8b86-fc1397c5e36f)
+![rc3](https://github.com/user-attachments/assets/82d56161-0ac9-4866-aa57-a22c3f9b9ad2)
 ## RESULT
 The program for developing a simple calculator in React.js is executed successfully.
